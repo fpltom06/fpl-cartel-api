@@ -1,0 +1,45 @@
+{
+  "streamlit_rules.py": {
+    "source": "app.py",
+    "sourceSha256": "da27338c0fc87c810a70bfd86247c0b36d893cddbe677393da3635c3b6dd44ed",
+    "functions": {
+      "is_free_hit_chip_name": "ad51706769ff551038a9cb9b50c9f6ff85d34216ca3e5fdd06a90dcae8467481",
+      "free_hit_events_from_entry_history": "07a341312a7c348385d4df812e5f5311c51cc85f1a38fa5220a5fa963a343e59",
+      "squad_ids_from_picks_data": "c035b17df887ea31568c1226108bed8a5427da1d37593ad7289083783b429c37",
+      "bank_from_picks_data": "3880d1f414a39664afdd4eebb929b0706a07ab665be67949a4b5b461c5066621",
+      "get_permanent_squad_before_gw": "192e662fe0dd93fa7ebe2768090b7c8b10ac310c0712a666feaae9682b4563c8",
+      "is_valid_starting_xi": "8534b10a65586d8fcd0bb98dc1e1fcd6ec3dd89537ac1e56a451358a2ebee9cf",
+      "optimize_starting_xi": "ac56adddb91a6f210c1cc7edf5ddf2aeb58a1281447eca15d51d83872586e1d7",
+      "formation_text": "069c64f7aef31d1e6d408fa547b358193b056d1801e6205b716e2a03457a7e30",
+      "round_table_values": "68ce9d5f3d5cc7ea82d97dddc0f619432958a4f3c05239d58b09377628a05583",
+      "calculate_team_sheet": "535cf4f0e2b0da8cae1390d0e5891c5543c95456debb5032c127ee74de57314d",
+      "calculate_multi_gw_team_sheets": "7a58de1647c257bbc63a7d6f0b8659468a1c89ccb54cdb6eca8d531b9dbbf3d3",
+      "club_rule_allows_transfer": "845c7182edd45c634f371f771796d113265dcb9c761d2d2f1752a800ff55f649",
+      "get_valid_buy_options": "3006328c9a7a22d32517d8390f74d7770d70977a9cd76ff46398a3f645f73561",
+      "get_projection_score": "c5dd6e2633f0f64067bc68e7077a0c4b719de0d58346d4c7c49fb7672410c8fe",
+      "add_transfer_upgrade_scores": "71f7abf67696b488b536cd73074fc3849b23e8b85692590997fa1e1d43045e45",
+      "calculate_transfer_projection_total": "cc35b3fc9a6a28e5fe8aa43f0e9bd44b1722fb657814db484545c28ca7db98bb"
+    },
+    "constants": {
+      "POSITION_ORDER": [
+        "GK",
+        "DEF",
+        "MID",
+        "FWD"
+      ]
+    }
+  },
+  "transfer_rules.py": {
+    "source": "web_transfers.py",
+    "sourceSha256": "ac64b7f818fe356fa4c8e7d191e627228593679bbf9d7334079eeb102fa53eca",
+    "functions": {
+      "player": "9b72ab0a634fbdb5938b67cb16b2fa3c070a066bdb937af17ae4077e8b276084",
+      "valid_buys": "33410e0affa01788f749beec6f8afed86ffee6d5470ebce31ae955204ee05959",
+      "search_options": "ecd010e1350c0c211207d257c09b02b210288491d434307f1208c6084f489a15"
+    },
+    "constants": {
+      "BEAM_WIDTH": 10,
+      "BUYS_PER_SELLER": 3
+    }
+  }
+}

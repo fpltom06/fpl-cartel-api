@@ -1,0 +1,16 @@
+# Configuration only. This file does not provision a service.
+services:
+  - type: web
+    name: fpl-cartel-api
+    runtime: python
+    buildCommand: python -m pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.14
+      - key: PROJECTIONS_PATH
+        value: data/projections.json
+      # Empty means no browser origins permitted until Netlify's URL is known.
+      - key: ALLOWED_ORIGINS
+        value: ""

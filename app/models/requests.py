@@ -41,3 +41,23 @@ class TransferMove(BaseModel):
 class TransferPreviewRequest(TransferRequest):
     moves:Annotated[list[TransferMove],Field(max_length=3)]=Field(default_factory=list)
 
+
+class BestSquadRequest(BaseModel):
+    model_config=ConfigDict(extra="forbid",strict=True,allow_inf_nan=False)
+    gameweek:Gameweek
+    budget:Annotated[float,Field(ge=95,le=115)]=100.0
+    banned_player_ids:Annotated[list[PlayerId],Field(max_length=2000)]=Field(default_factory=list)
+    modelUpdatedAt:Annotated[str|None,Field(max_length=100)]=None
+
+    @field_validator("budget")
+    @classmethod
+    def budget_step(cls,value):
+        if abs(value*10-round(value*10))>1e-8:
+            raise ValueError("Budget must use increments of 0.1 million.")
+        return value
+
+    @field_validator("banned_player_ids")
+    @classmethod
+    def unique_bans(cls,value):
+        if len(value)!=len(set(value)):raise ValueError("Duplicate banned Player IDs.")
+        return value

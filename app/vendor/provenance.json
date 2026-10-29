@@ -41,5 +41,16 @@
       "BEAM_WIDTH": 10,
       "BUYS_PER_SELLER": 3
     }
+  },
+  "best_squad_rules.py": {
+    "source": "app.py",
+    "sourceSha256": "da27338c0fc87c810a70bfd86247c0b36d893cddbe677393da3635c3b6dd44ed",
+    "functions": {
+      "solve_squad_with_scipy": "fe3bda816d15f25ca39a25e7a35e2d60cd7d59372fbeb4c766efc68fb01d612d",
+      "solve_squad_with_pulp": "3f3d096610b3abe2d7d05c567e8865626170fcb733c68d01eed67a214a51f5d0",
+      "build_best_squad": "8f3e3ca2f3e56af817e7f4f901eb6060d09987ba3b78aae3625c3a20378aaaa4",
+      "normalize_squad_position": "d679dae8664d74ecb11cfef0aff9677d4c8aca23d6bc99066faf89ec355aa208",
+      "get_squad_candidates": "fba0631affa1550ea8eac10efccb8df3040b9044ba510687d3a60d38bf2876be"
+    }
   }
 }

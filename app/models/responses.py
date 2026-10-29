@@ -115,3 +115,11 @@ class PreviewResponse(BaseModel):
     netTeamGain:float
 
 
+
+class BestSquadResponse(WeeklySheet):
+    players:list[PitchPlayer]
+    captain:PitchPlayer
+    squadCost:float
+    budget:float
+    squadProjection:float
+    modelUpdatedAt:str

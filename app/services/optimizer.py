@@ -154,3 +154,29 @@ class OptimizerService:
                 "netTeamGain":after-before-(request.transferHit if request.moves else 0)}
 
 
+
+    def best_squad(self,request):
+        # This is the Streamlit single-GW objective: maximize the full 15's
+        # existing points, then optimize XI/captain within that selected squad.
+        from app.services.rules import load_module
+        rules=load_module("best_squad_rules.py")
+        with self.limited():
+            snapshot=self.snapshot(request.modelUpdatedAt)
+            self.check_weeks(snapshot,[request.gameweek])
+            if not set(request.banned_player_ids)<=set(snapshot.players):
+                raise ApiError(422,"invalid_banned_players","A banned Player ID is not in the current projection export.")
+            column=f"GW{request.gameweek}"
+            eligible=snapshot.frame[~snapshot.frame["Player ID"].isin(request.banned_player_ids)].copy()
+            candidates=rules.get_squad_candidates(eligible,[column])
+            # Avoid invoking an integer solver on an empty/insufficient pool.
+            required={"GK":2,"DEF":5,"MID":5,"FWD":3}
+            if any((candidates["Position"]==p).sum()<count for p,count in required.items()):
+                raise ApiError(422,"no_legal_squad","No legal squad is available with this budget and these bans.")
+            squad=rules.build_best_squad(candidates,column,request.budget)
+            if squad is None or len(squad)!=15:
+                raise ApiError(422,"no_legal_squad","No legal squad is available with this budget and these bans.")
+            cost=round(float(squad["Price"].sum()),1)
+            sheet=self.sheets(snapshot,{},squad,[request.gameweek])["gameweeks"][0]
+            players=[self.pitch_player(row,request.gameweek,snapshot,sheet["captainPlayerId"],sheet["viceCaptainPlayerId"]) for _,row in squad.iterrows()]
+            return sheet|{"players":players,"captain":next(p for p in players if p["playerId"]==sheet["captainPlayerId"]),
+                "squadCost":cost,"budget":request.budget,"squadProjection":float(squad[column].sum()),"modelUpdatedAt":snapshot.model_updated_at}
